@@ -356,6 +356,8 @@ int Viewport::handle(int event)
   int buttonMask, wheelMask;
   DownMap::const_iterator iter;
 
+  DesktopWindow *dw = dynamic_cast<DesktopWindow*>(window());
+
   switch (event) {
   case FL_PASTE:
     buffer = new char[Fl::event_length() + 1];
@@ -434,9 +436,26 @@ int Viewport::handle(int event)
     while (!downKeySym.empty())
       handleKeyEvent(downKeySym.begin()->first, downKeySym.begin()->first,
                      "", false);
+    dw->ungrabKeyboard(); 
+    dw->fullscreen_off();
     return 1;
 
   case FL_KEYDOWN:
+    // Code to use Control_R as a grabKeyboard shortcut, as in remmina
+    if (menuKeyCode && (Fl::event_key() == FL_Control_R)) {
+      if(dw->grab_keyboard_state == 0) {
+	dw->grab_keyboard_state = 1;
+	dw->grabKeyboard();
+      }
+      else  {
+	dw->grab_keyboard_state = 0;
+	dw->fullscreen_off();
+	dw->ungrabKeyboard();
+      }
+      //window()->fullscreen_off();
+      vlog.debug("keyboard_grab key (ctrl-right) hit, keyboard grab state: %d\n", dw->grab_keyboard_state);
+    }
+
     if (menuKeyCode && (Fl::event_key() == menuKeyCode)) {
       popupContextMenu();
       return 1;

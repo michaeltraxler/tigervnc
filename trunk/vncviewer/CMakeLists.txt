@@ -45,7 +45,7 @@ else()
   add_executable(vncviewer ${VNCVIEWER_SOURCES})
 endif()
 
-target_link_libraries(vncviewer rfb network rdr os Xregion ${FLTK_LIBRARIES} ${GETTEXT_LIBRARIES})
+target_link_libraries(vncviewer rfb network rdr os Xregion ${FLTK_LIBRARIES} -ldl ${GETTEXT_LIBRARIES})
 
 # When building with GnuTLS, librdr depends on ws2_32, so in order to make
 # MinGW happy, we need to put ws2_32 in librdr's target_link_libraries string,

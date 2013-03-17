@@ -80,12 +80,14 @@ public:
   int handle(int event);
 
   void fullscreen_on();
-
-private:
-  static int fltkHandle(int event, Fl_Window *win);
+  int grab_keyboard_state;
 
   void grabKeyboard();
   void ungrabKeyboard();
+
+
+private:
+  static int fltkHandle(int event, Fl_Window *win);
 
   static void handleGrab(void *data);
 
