@@ -58,6 +58,8 @@ extern rfb::BoolParameter acceptClipboard;
 extern rfb::BoolParameter sendClipboard;
 extern rfb::BoolParameter sendPrimary;
 
+extern rfb::BoolParameter hostKeyMetaL;
+
 extern rfb::StringParameter menuKey;
 
 extern rfb::BoolParameter fullscreenSystemKeys;

@@ -442,7 +442,7 @@ int Viewport::handle(int event)
 
   case FL_KEYDOWN:
     // Code to use Control_R as a grabKeyboard shortcut, as in remmina
-    if (menuKeyCode && (Fl::event_key() == FL_Control_R)) {
+    if (menuKeyCode && (Fl::event_key() == (hostKeyMetaL ? FL_Meta_L : FL_Control_R) ) ) {
       if(dw->grab_keyboard_state == 0) {
 	dw->grab_keyboard_state = 1;
 	dw->grabKeyboard();
